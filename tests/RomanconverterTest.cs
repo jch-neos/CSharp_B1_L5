@@ -8,8 +8,9 @@ public class RomanNumeralConverterTest{
     public void When_emptyString_expect_throw(){
         RomanNumeralConverter converter = new();
         var action = () => { _=converter.Parse(String.Empty); };
-        var exception=Assert.ThrowsAny<ArgumentException>(action);
-        Assert.Contains("value", exception.Message);
+        // var exception=Assert.ThrowsAny<ArgumentException>(action);
+        // Assert.Contains("value", exception.Message);
+        action.Should().Throw<ArgumentException>().WithMessage("*value*");
     }
     
     [Theory]
@@ -22,15 +23,16 @@ public class RomanNumeralConverterTest{
     public void When_InvalidNumeral_expect_throw(string num){
         RomanNumeralConverter converter = new();
         var action = () => { _=converter.Parse(num); };
-        var exception=Assert.Throws<FormatException>(action);
+        action.Should().Throw<FormatException>();
     }
     [Theory]
     [InlineData("IVIV")]
     public void When_InvalidNumeral_expect_throwRepeatedGroup(string num){
         RomanNumeralConverter converter = new();
         var action = () => { _=converter.Parse(num); };
-        var exception=Assert.Throws<FormatException>(action);
-        Assert.Contains("2 groups",exception.Message);
+        // var exception=Assert.Throws<FormatException>(action);
+        // Assert.Contains("2 groups",exception.Message);
+        action.Should().Throw<ArgumentException>().WithMessage("*2 groups*");
     }
 
     [Theory]
@@ -43,7 +45,7 @@ public class RomanNumeralConverterTest{
     public void When_ValidNumeral_expect_returnCorrectValue(string num, int expected){
         RomanNumeralConverter converter = new();
         var value =converter.Parse(num);
-        Assert.Equal(expected, value);
+        value.Should().Be(expected);
     }
 
    [Theory]
@@ -56,7 +58,7 @@ public class RomanNumeralConverterTest{
     public void When_PositiveValue_expect_returnCorrectNuvmeral(int num, string expected){
         RomanNumeralConverter converter = new();
         var value =converter.Stringify(num);
-        Assert.Equal(expected, value);
+        value.Should().Be(expected);
     }
 
     [Theory]
@@ -65,6 +67,6 @@ public class RomanNumeralConverterTest{
     public void When_NegativeValue_expect_throw(int num) {
         RomanNumeralConverter converter = new();
         var action = () => { _=converter.Stringify(num); };
-        Assert.ThrowsAny<ArgumentException>(action);
+        action.Should().Throw<ArgumentException>();
     }
 }

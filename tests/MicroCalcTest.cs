@@ -33,7 +33,7 @@ public class MicroCalcTheorys
         string result = _microCalc.Add(a.ToString(), b.ToString());
 
         // Assert
-        Assert.Equal(expectedResult.ToString(), result);
+        result.Should().Be(expectedResult.ToString());
     }
 
     [Theory]
@@ -56,7 +56,7 @@ public class MicroCalcTheorys
         string result = _microCalc.Minus(a.ToString(), b.ToString());
 
         // Assert
-        Assert.Equal(expectedResult.ToString(), result);
+        result.Should().Be(expectedResult.ToString());
     }
 
     [Theory]
@@ -78,6 +78,6 @@ public class MicroCalcTheorys
         string result = _microCalc.Mul(a.ToString(), b.ToString());
 
         // Assert
-        Assert.Equal(expectedResult.ToString(), result);
+        result.Should().Be(expectedResult.ToString());
     }
 }

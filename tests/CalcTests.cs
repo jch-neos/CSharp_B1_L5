@@ -1,5 +1,3 @@
-using Xunit;
-
 public class CalcTest
 {
 
@@ -10,7 +8,7 @@ public class CalcTest
 
         var act = () => { _=calc.Div(1234,0); };
 
-        Assert.Throws<DivideByZeroException>(act);
+        act.Should().Throw<DivideByZeroException>();
     }
 
     [Theory]
@@ -25,7 +23,7 @@ public class CalcTest
 
         var res = calc.Mul(a,b);
 
-        Assert.Equal(expectedResult, res);
+        res.Should().Be(expectedResult);
     }
 
     [Theory]
@@ -40,7 +38,7 @@ public class CalcTest
 
         var res = calc.Div(a,b);
 
-        Assert.Equal(expectedResult, res);
+        res.Should().Be(expectedResult);
     }
 
 
@@ -56,7 +54,7 @@ public class CalcTest
 
         var res = calc.Add(a,b);
 
-        Assert.Equal(expectedResult, res);
+        res.Should().Be(expectedResult);
     }
 
 }

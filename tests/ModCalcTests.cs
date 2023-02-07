@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Xunit;
 
 [Collection("ModNCalculator")]
@@ -9,7 +10,8 @@ public class ModNCalcTest
     {
         var act = () => { var calc = new ModNCalculator(-3); };
 
-        Assert.ThrowsAny<Exception>(act);
+        //Assert.ThrowsAny<Exception>(act);
+        act.Should().Throw<Exception>("Invalid modulus").WithMessage("*at least 2*");
     }
 
     [Fact]
@@ -19,7 +21,7 @@ public class ModNCalcTest
 
         var act = () => { _ = calc.Div(1234, 1); };
 
-        Assert.Throws<InvalidOperationException>(act);
+        act.Should().Throw<InvalidOperationException>("can't devide in Z/nZ");
     }
 
     [Theory]
@@ -35,7 +37,7 @@ public class ModNCalcTest
 
         var res = calc.Mul(a, b);
 
-        Assert.Equal(expectedResult, res);
+        res.Should().Be(expectedResult);
     }
 
     [Theory]
@@ -51,7 +53,7 @@ public class ModNCalcTest
 
         var res = calc.Add(a, b);
 
-        Assert.Equal(expectedResult, res);
+        res.Should().Be(expectedResult);
     }
 
 }

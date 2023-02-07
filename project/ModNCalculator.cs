@@ -6,7 +6,7 @@ public class ModNCalculator : ICalculator<int>
     {
         if (n <= 1)
         {
-            throw new ArgumentOutOfRangeException(nameof(n), n, "value shoud be at lest 2");
+            throw new ArgumentOutOfRangeException(nameof(n), n, "value shoud be at least 2");
         }
         this.n = n;
     }
