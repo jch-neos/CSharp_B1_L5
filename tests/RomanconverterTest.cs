@@ -30,9 +30,7 @@ public class RomanNumeralConverterTest{
     public void When_InvalidNumeral_expect_throwRepeatedGroup(string num){
         RomanNumeralConverter converter = new();
         var action = () => { _=converter.Parse(num); };
-        // var exception=Assert.Throws<FormatException>(action);
-        // Assert.Contains("2 groups",exception.Message);
-        action.Should().Throw<ArgumentException>().WithMessage("*2 groups*");
+        action.Should().Throw<FormatException>().WithMessage("*2 groups*");
     }
 
     [Theory]

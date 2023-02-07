@@ -1,5 +1,4 @@
-using Moq;
-using Xunit;
+using System.Xml.Linq;
 
 public class MicroCalcTheorys
 {
@@ -80,4 +79,18 @@ public class MicroCalcTheorys
         // Assert
         result.Should().Be(expectedResult.ToString());
     }
+
+    [Fact]
+    void When_Adding_Should_callAdd(){
+        // Arrange
+        var fixture = new Fixture().Customize(
+                new AutoMoqCustomization{ConfigureMembers=true});
+        var cal = fixture.Freeze<Mock<ICalculator<int>>>();
+        var mc = fixture.Create<MicroCalc>();
+        // Act
+        mc.Add(fixture.Create<string>(), fixture.Create<string>());
+        // Assert
+        cal.Verify(x=>x.Add(It.IsAny<int>(),It.IsAny<int>()), Times.Once);
+    }
+
 }
